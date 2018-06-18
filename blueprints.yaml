@@ -6,9 +6,22 @@ author:
   name: jmolivas
   email: jesus.olivas@gmail.com
 homepage: https://github.com/weknowinc/grav-plugin-permissions
-demo: http://demo.yoursite.com
+#demo: http://demo.yoursite.com
 keywords: grav, plugin, user, access, permissions
 bugs: https://github.com/weknowinc/grav-plugin-permissions/issues
 docs: https://github.com/weknowinc/grav-plugin-permissions/blob/master/README.md
 license: MIT
 
+form:
+  validation: strict
+  fields:
+    enabled:
+      type: toggle
+      label: Plugin status
+      highlight: 1
+      default: 0
+      options:
+        1: Enabled
+        0: Disabled
+      validate:
+        type: bool
