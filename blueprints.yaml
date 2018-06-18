@@ -1,0 +1,14 @@
+name: Permissions
+version: 0.1.0
+description: Check for User Permissions on page
+icon: plug
+author:
+  name: jmolivas
+  email: jesus.olivas@gmail.com
+homepage: https://github.com/weknowinc/grav-plugin-permissions
+demo: http://demo.yoursite.com
+keywords: grav, plugin, user, access, permissions
+bugs: https://github.com/weknowinc/grav-plugin-permissions/issues
+docs: https://github.com/weknowinc/grav-plugin-permissions/blob/master/README.md
+license: MIT
+

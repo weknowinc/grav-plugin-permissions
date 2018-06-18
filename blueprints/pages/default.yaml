@@ -1,0 +1,36 @@
+title: PLUGIN_ADMIN.DEFAULT
+'@extends':
+    type: default
+    context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      fields:
+        options:
+          fields:
+            publishing:
+              fields:
+                header.access.view:
+                  ordering@: 1
+                  type: select
+                  multiple: true
+                  size: large
+                  label: View
+                  data-options@: '\Grav\Common\User\Group::groupNames'
+                  classes: fancy
+                  help: PLUGIN_ADMIN.GROUPS_HELP
+                  validate:
+                      type: commalist
+
+                header.access.edit:
+                  ordering@: 1
+                  type: select
+                  multiple: true
+                  size: large
+                  label: Edit
+                  data-options@: '\Grav\Common\User\Group::groupNames'
+                  classes: fancy
+                  help: PLUGIN_ADMIN.GROUPS_HELP
+                  validate:
+                      type: commalist
