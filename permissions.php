@@ -1,7 +1,9 @@
 <?php
+
 namespace Grav\Plugin;
 
 use Grav\Common\Plugin;
+use Grav\Common\Utils;
 
 /**
  * Class PermissionsPlugin
@@ -59,27 +61,26 @@ class PermissionsPlugin extends Plugin
     public function onPageInitialized()
     {
         // Validate user is logged in
-        if (!$this->grav['user']['authenticated']) {
+        if (!$this->grav['user'] || !$this->grav['user']['authenticated']) {
             return;
         }
 
-        // Get topParent if any or current page
-        $page = $this->grav['page']->topParent()->isPage()?$this->grav['page']->topParent():$this->grav['page'];
+        // Get topParent if any
+        $page = $this->grav['page']->topParent()&&$this->grav['page']->topParent()->isPage()?$this->grav['page']->topParent():$this->grav['page'];
         $header = $page->header();
 
-        if (!property_exists($header, 'access')){
+        $access = Utils::getDotNotation(isset($header->access) ? (array)$header->access : [], 'site');
+        if (!$access) {
             return;
         }
 
-        if (!array_key_exists('view', $header->access)){
-            return;
-        }
-
-        // Validate page access vs user access groups intersection
-        $access = $header->access['view'];
         $groups = $this->grav['user']->groups;
-        if (array_intersect($access, $groups)) {
-            return;
+
+        // Validate user access groups vs page access
+        foreach ($groups as $group) {
+            if ((bool)Utils::getDotNotation($access, $group)) {
+                return;
+            }
         }
 
         $this->grav['page']->modifyHeader('access', array('site.login' => false));

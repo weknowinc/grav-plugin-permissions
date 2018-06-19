@@ -11,26 +11,50 @@ form:
           fields:
             publishing:
               fields:
-                header.access.view:
-                  ordering@: 1
-                  type: select
-                  multiple: true
-                  size: large
-                  label: View
-                  data-options@: '\Grav\Common\User\Group::groupNames'
-                  classes: fancy
-                  help: PLUGIN_ADMIN.GROUPS_HELP
-                  validate:
-                      type: commalist
 
-                header.access.edit:
+                header.login.visibility_requires_access:
                   ordering@: 1
-                  type: select
-                  multiple: true
-                  size: large
-                  label: Edit
-                  data-options@: '\Grav\Common\User\Group::groupNames'
-                  classes: fancy
-                  help: PLUGIN_ADMIN.GROUPS_HELP
+                  type: toggle
+                  toggleable: true
+                  label: Visibility Requires Access
+                  highlight: 1
+                  default: false
+                  options:
+                    true: Yes
+                    false: No
                   validate:
-                      type: commalist
+                    type: bool
+
+                header.access.site:
+                  ordering@: 2
+                  type: checkboxes
+                  toggleable: true
+                  label: Groups
+                  help: Groups
+                  default: false
+                  ignore_empty: true
+                  data-options@: '\Grav\Common\User\Group::groupNames'
+                  use: keys
+                  validate:
+                    type: array
+
+#                header.access.site:
+#                  ordering@: 1
+#                  type: select
+#                  multiple: true
+#                  size: large
+#                  label: Access Groups
+#                  data-options@: '\Grav\Common\User\Group::groupNames'
+#                  classes: fancy
+#                  help: PLUGIN_ADMIN.GROUPS_HELP
+#                  use: keys
+#                  validate:
+#                      type: array
+
+#                header.access.permissions:
+#                  ordering@: 3
+#                  type: permissions
+#                  label: PLUGIN_ADMIN.PERMISSIONS
+#                  ignore_empty: true
+#                  validate:
+#                      type: array

@@ -1,6 +1,6 @@
 name: Permissions
 version: 0.1.0
-description: Check for User Permissions on page
+description: GUI for User Permissions on page
 icon: plug
 author:
   name: jmolivas
