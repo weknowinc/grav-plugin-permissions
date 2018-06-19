@@ -37,24 +37,3 @@ form:
                   use: keys
                   validate:
                     type: array
-
-#                header.access.site:
-#                  ordering@: 1
-#                  type: select
-#                  multiple: true
-#                  size: large
-#                  label: Access Groups
-#                  data-options@: '\Grav\Common\User\Group::groupNames'
-#                  classes: fancy
-#                  help: PLUGIN_ADMIN.GROUPS_HELP
-#                  use: keys
-#                  validate:
-#                      type: array
-
-#                header.access.permissions:
-#                  ordering@: 3
-#                  type: permissions
-#                  label: PLUGIN_ADMIN.PERMISSIONS
-#                  ignore_empty: true
-#                  validate:
-#                      type: array
