@@ -52,5 +52,8 @@ Note that if you use the admin plugin, a file with your configuration, and named
 
 ## To Do
 
-- [ ] Future plans, if any
+- [ ] Add usage instructions
+- [ ] Add configurable options
+- [ ] Add configurable label for fields
+
 

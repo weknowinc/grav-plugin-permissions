@@ -88,6 +88,7 @@ class PermissionsPlugin extends Plugin
             }
         }
 
+        // Deny access if group validation was not successful
         $this->grav['page']->modifyHeader('access', array('site.login' => false));
     }
 
