@@ -60,14 +60,15 @@ class PermissionsPlugin extends Plugin
      */
     public function onPageInitialized()
     {
-        // Validate user is logged in
-        if (!$this->grav['user'] || !$this->grav['user']['authenticated']) {
-            return;
-        }
-
         // Get topParent if any
         $page = $this->grav['page']->topParent()&&$this->grav['page']->topParent()->isPage()?$this->grav['page']->topParent():$this->grav['page'];
         $header = $page->header();
+
+        // Validate user is logged in
+        if ($this->shouldRedirect($header)) {
+            $this->grav['page']->modifyHeader('access', array('site.login' => false));
+            return;
+        }
 
         $access = Utils::getDotNotation(isset($header->access) ? (array)$header->access : [], 'site');
         if (!$access) {
@@ -75,6 +76,10 @@ class PermissionsPlugin extends Plugin
         }
 
         $groups = $this->grav['user']->groups;
+        if (!$groups) {
+            $this->grav['page']->modifyHeader('access', array('site.login' => false));
+            return;
+        }
 
         // Validate user access groups vs page access
         foreach ($groups as $group) {
@@ -84,6 +89,20 @@ class PermissionsPlugin extends Plugin
         }
 
         $this->grav['page']->modifyHeader('access', array('site.login' => false));
+    }
+
+    private function shouldRedirect($header) {
+        $requireLogin = (bool)Utils::getDotNotation(isset($header) ? (array)$header : [], 'login.visibility_requires_access');
+        if (!$requireLogin) {
+            return false;
+        }
+
+        $isLoginPage = $this->grav['page']->route()===$this->grav['config']['plugins']['login']['route'];
+        if ($isLoginPage) {
+            return false;
+        }
+
+        return !$this->grav['user']['authenticated'];
     }
 
 }
